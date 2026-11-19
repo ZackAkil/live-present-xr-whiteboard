@@ -66,12 +66,31 @@ const SYSTEM_INSTRUCTION =
 
 let aiInstance = null;
 
+async function loadFirebaseConfig() {
+  try {
+    const { firebaseConfig } = await import('./firebase-config.js');
+    if (
+      !firebaseConfig?.apiKey ||
+      firebaseConfig.apiKey.startsWith('YOUR_') ||
+      !firebaseConfig?.projectId ||
+      firebaseConfig.projectId.startsWith('YOUR_')
+    ) {
+      return null;
+    }
+    return firebaseConfig;
+  } catch {
+    return null;
+  }
+}
+
+export async function isLiveConfigured() {
+  return (await loadFirebaseConfig()) !== null;
+}
+
 async function getAi() {
   if (!aiInstance) {
-    let firebaseConfig;
-    try {
-      ({ firebaseConfig } = await import('./firebase-config.js'));
-    } catch {
+    const firebaseConfig = await loadFirebaseConfig();
+    if (!firebaseConfig) {
       throw new Error(
         'Missing firebase-config.js. Copy firebase-config.example.js to firebase-config.js and add your Firebase credentials.'
       );

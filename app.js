@@ -2,7 +2,7 @@ import { setupCamera, createHandDetector, detectHands } from './handTracker.js';
 import { extractPinchState, computeTwoHandTransform, smoothPinchState } from './pinchLogic.js';
 import { createShape, createDefaultShapes, updateShapes, findShapeAt, drawShapes, triggerClearFlyOut } from './shapes.js';
 import { startStroke, appendStrokePoint, drawStrokes, eraseStrokesAt } from './drawing.js';
-import { startMutedLiveSession } from './liveShapesApi.js';
+import { isLiveConfigured, startMutedLiveSession } from './liveShapesApi.js';
 
 const video = document.getElementById('webcam');
 const canvas = document.getElementById('overlay');
@@ -266,8 +266,15 @@ async function main() {
 }
 
 let liveSession = null;
+let isLiveAvailable = false;
+
+isLiveConfigured().then((configured) => {
+  isLiveAvailable = configured;
+  liveBtn.hidden = !configured;
+});
 
 async function toggleLiveSession() {
+  if (!isLiveAvailable) return;
   if (liveSession) {
     await liveSession.stop();
     liveSession = null;

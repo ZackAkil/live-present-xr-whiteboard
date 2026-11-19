@@ -20,7 +20,7 @@ Then open `http://localhost:8000` in your browser and allow camera access.
 
 ### Enabling Gemini Live (Optional)
 
-Hand tracking and drawing work out of the box. To enable the Gemini Live voice assistant:
+Hand tracking, shape manipulation, and drawing work out of the box (including on static hosts like GitHub Pages—the Gemini Live option is automatically hidden when Firebase is not configured). To enable the Gemini Live voice assistant locally:
 
 1. Create a Firebase project and enable **Firebase AI Logic** (Gemini Developer API).
 2. Copy `firebase-config.example.js` to `firebase-config.js`:
