@@ -1,4 +1,5 @@
 # XR Presenter
+https://zackakil.github.io/live-present-xr-whiteboard/
 
 A browser-based webcam AR/XR whiteboard with real-time MediaPipe hand tracking and optional Gemini Live voice-controlled shape spawning.
 
