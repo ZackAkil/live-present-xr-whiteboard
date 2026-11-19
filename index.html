@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XR Presenter</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/hand-pose-detection"></script>
+</head>
+<body>
+  <video id="webcam" autoplay playsinline muted></video>
+  <canvas id="overlay"></canvas>
+  <div id="top-left">
+    <div id="app-title">XR Presenter</div>
+  </div>
+  <div id="status">Initializing camera...</div>
+  <div id="live-indicator">
+    <span class="live-dot"></span>
+    <span>Gemini Live</span>
+  </div>
+  <div id="menu-container">
+    <button id="menu-btn" type="button" aria-label="Menu" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="3" y1="5" x2="15" y2="5" />
+        <line x1="3" y1="9" x2="15" y2="9" />
+        <line x1="3" y1="13" x2="15" y2="13" />
+      </svg>
+    </button>
+    <div id="menu-panel" class="menu-panel hidden">
+      <button id="draw-btn" class="pill-btn" type="button">Draw: Off (D)</button>
+      <button id="erase-btn" class="pill-btn" type="button">Erase: Off (E)</button>
+      <button id="live-btn" class="pill-btn" type="button">Gemini Live: Off (G)</button>
+    </div>
+  </div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
