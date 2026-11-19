@@ -13,6 +13,7 @@ const menuPanel = document.getElementById('menu-panel');
 const drawBtn = document.getElementById('draw-btn');
 const eraseBtn = document.getElementById('erase-btn');
 const liveBtn = document.getElementById('live-btn');
+const liveSetupHint = document.getElementById('live-setup-hint');
 const liveIndicator = document.getElementById('live-indicator');
 const ctx = canvas.getContext('2d');
 
@@ -270,7 +271,11 @@ let isLiveAvailable = false;
 
 isLiveConfigured().then((configured) => {
   isLiveAvailable = configured;
-  liveBtn.hidden = !configured;
+  liveBtn.disabled = !configured;
+  liveSetupHint.hidden = configured;
+  if (!configured) {
+    liveBtn.textContent = 'Gemini Live: Setup Required';
+  }
 });
 
 async function toggleLiveSession() {
